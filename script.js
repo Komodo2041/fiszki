@@ -146,7 +146,12 @@ new Vue({
       this.step++;
       if (this.step >= this.duration) {
         this.step = 0;
-        this.nrword++;
+        if (this.both) {
+          this.nrword++;
+        } else if (this.stepinstep == 1) {
+          this.nrword++;
+        }
+
         if (this.nrword >= 500) {
           if (this.repeat) {
             this.nrword = 0;
@@ -169,8 +174,10 @@ new Vue({
           this.word2 = "";
           this.stepinstep = 1;
         } else {
-          this.word2 = this.words[nr][1];
+          this.word2 = this.words[nr - 1][1];
+          this.step--;
           this.stepinstep = 0;
+
         }
       }
 
