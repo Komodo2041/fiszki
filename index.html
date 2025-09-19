@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fiszki Project</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <style>
+        .container {
+            width: 80%;
+            margin: 20px auto 0px auto;
+        }
+
+        .removed label {
+            text-decoration: line-through;
+        }
+
+        ul li {
+            list-style-type: none;
+        }
+
+        ul li span {
+            margin-left: 5px;
+        }
+
+        .footer {
+            font-size: 0.7em;
+            margin-top: 20vh;
+        }
+
+        .box_list {
+            padding: 15px;
+            background: #afb0c0;
+            color: #1c1d1d;
+            float: left;
+            border: 1px solid #1c1d1d;
+            margin: 3px;
+            border-radius: 5px;
+            cursor: pointer;
+
+        }
+
+        .box_list:hover {
+            background: #88afb0;
+        }
+
+        .main {
+            border: 2px solid #1c1c1c;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .wordsShow {
+            font-size: 60px;
+            font-weight: bold;
+        }
+
+        .wordsdiv {
+            margin: 5px;
+        }
+
+        .btnn {
+            background: silver;
+        }
+
+        .btns {
+            background: #ff44ff;
+        }
+
+        .diso {
+            display: none;
+        }
+
+        .oneback {
+            color: blue;
+        }
+
+        .oneback2 {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="container">
+        <h2>Fiszki</h2>
+        <div class="configuration">
+            <button @click="changeconf" class="btn btn-info">
+                <span v-show="showconf == 1">Ukryj konfigurację</span>
+                <span v-show="showconf == 0">Pokaż konfigruację</span>
+            </button>
+        </div>
+        <div class="configuration" v-show="showconf">
+            <label>Czas Wyświetlania (x*50ms)</label>
+            <input type="number" v-model="duration" class="form" min="1" /> {{ duration*50/1000 }} s<br />
+            <label>Słowa wyświetlane razem</label>
+            <input type="checkbox" value="1" name="bothword" v-model="both" /><br />
+            <label>Powtarzaj od początku </label>
+            <input type="checkbox" value="1" name="repeatword" v-model="repeat" /><br />
+            <label>Ilość łączonych słów</label>
+            <input type="number" v-model="joinwordcount" class="form" min="2" /> <br />
+        </div>
+
+        <div v-show="hpart == 0">
+            <h3>Listy do wyboru</h3>
+            <ul>
+                <li v-for="n in maxFiszki" :key="n">
+                    <div class="box_list" @click="changeList(n)">
+                        Lista nr {{n}}
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div v-if="hpart">
+            <h3>Lista nr {{hpart}}</h3>
+            <button @click="backList" class="btn btn-info">Powrót do wszystkich list</button>
+            <button @click="changeTryb(0)" class="btn btn-info" v-show="tryb != 0">Wyświetlaj Słowa</button>
+            <button @click="changeTryb(1)" class="btn btn-info" v-show="tryb != 1">Sprawdzaj (wpisz polskie
+                słowo)</button>
+            <button @click="changeTryb(2)" class="btn btn-info" v-show="tryb != 2">Sprawdzaj (wpisz angielskie
+                słowo)</button>
+            <button @click="changeTryb(3)" class="btn btn-info" v-show="tryb != 3">Łącz słowa</button>
+
+            <div class="main" v-show="tryb == 0">
+                <button :disabled="state==='started'" title="start" @click="start()">
+                    <i class="glyphicon glyphicon-play"></i>
+                </button>
+                <button :disabled="state!=='started'" title="pause" @click="pause()">
+                    <i class="glyphicon glyphicon-pause"></i>
+                </button>
+                <button :disabled="state!=='started' && state !== 'paused'" title="stop" @click="stop()">
+                    <i class="glyphicon glyphicon-stop"></i>
+                </button>
+                <p class="wordsShow">
+                    {{word1}} {{diff}} {{word2}}
+                </p>
+            </div>
+            <div class="main" v-show="tryb == 1">
+                <label>Wpisz Polskie słowo</label><br />
+                <div class="alert alert-success" role="alert" v-show="checwordpl == 1">
+                    Dobrze
+                </div>
+                <div class="alert alert-danger" role="alert" v-show="checwordpl == 2">
+                    Żle
+                </div>
+                <h2>{{word1}}</h2>
+                <input type="text" value="" v-model="wordpl" /><br /><br />
+
+                <button @click="checkWordpl" class="btn btn-info">Sprawdź</button>
+                <button @click="seeCorectlypl" class="btn btn-info">Pokaż poprawne</button>
+                <button @click="checkNextWord" class="btn btn-info">Następne słowo</button>
+            </div>
+            <div class="main" v-show="tryb == 2">
+                <label>Wpisz Angielskie Słowo</label><br />
+                <div class="alert alert-success" role="alert" v-show="checwordeng == 1">
+                    Dobrze
+                </div>
+                <div class="alert alert-danger" role="alert" v-show="checwordeng == 2">
+                    Żle
+                </div>
+                <h2>{{word2}}</h2>
+                <input type="text" value="" v-model="wordeng" /><br /><br />
+
+                <button @click="checkWordeng" class="btn btn-info">Sprawdź</button>
+                <button @click="seeCorectlyeng" class="btn btn-info">Pokaż poprawne</button>
+                <button @click="checkNextWord" class="btn btn-info">Następne słowo</button>
+            </div>
+            <div class="main" v-show="tryb == 3">
+                <label>Łącz słowa</label><br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div v-for="n in joinwords" :key="n" class="wordsdiv">
+                            <button @click="selectWordOne(n)" class="btn"
+                                v-bind:class="{btns:selectn==n, btnn:selectn!=n, diso:disabledjoinwords.includes(n) }">{{words[n][0]}}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div v-for="j in joinwords2" :key="j" class="wordsdiv">
+                            <button @click="checkWordOne(j)" class="btn btnn"
+                                v-bind:class="{diso:disabledjoinwords.includes(j)}">{{words[j][1]}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div v-show=" tryb==0">
+                <h4>Wszystkie słowa</h4>
+                <button @click="changeallworldstryb(0)" class="btn btn-info" v-show="allWordsTryb != 0">Pokaż słowa z
+                    tłumaczeniami</button>
+                <button @click="changeallworldstryb(1)" class="btn btn-info" v-show="allWordsTryb != 1">Pokaż tylko
+                    Angielskie
+                    słowa</button>
+                <button @click="changeallworldstryb(2)" class="btn btn-info" v-show="allWordsTryb != 2">Pokaż tylko
+                    Polskie
+                    słowa</button>
+                <br /> <br />
+                <ul>
+                    <li v-for="(i, index) in words">
+                        <div class="box_list ">
+                            <span v-show="allWordsTryb == 0">{{i[0]}} - {{i[1]}}</span>
+                            <span class="oneback"
+                                v-show="(allWordsTryb == 1 || showtranslatepl.includes(index)) && !showtranslateeng.includes(index)"
+                                @click="showtranslation(index, 1)">{{i[0]}}</span>
+                            <span class="oneback2"
+                                v-show="(allWordsTryb == 2 || showtranslateeng.includes(index)) && !showtranslatepl.includes(index) "
+                                @click="showtranslation(index, 2)">{{i[1]}}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <script src="https://code.jquery.com/jquery-3.7.1.js"
+                integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
+            <script src="script.js"></script>
+</body>
+
+</html>
