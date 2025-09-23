@@ -1,0 +1,74 @@
+        .container {
+            width: 80%;
+            margin: 20px auto 0px auto;
+        }
+
+        .removed label {
+            text-decoration: line-through;
+        }
+
+        ul li {
+            list-style-type: none;
+        }
+
+        ul li span {
+            margin-left: 5px;
+        }
+
+        .footer {
+            font-size: 0.7em;
+            margin-top: 20vh;
+        }
+
+        .box_list {
+            padding: 15px;
+            background: #afb0c0;
+            color: #1c1d1d;
+            float: left;
+            border: 1px solid #1c1d1d;
+            margin: 3px;
+            border-radius: 5px;
+            cursor: pointer;
+
+        }
+
+        .box_list:hover {
+            background: #88afb0;
+        }
+
+        .main {
+            border: 2px solid #1c1c1c;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .wordsShow {
+            font-size: 60px;
+            font-weight: bold;
+        }
+
+        .wordsdiv {
+            margin: 5px;
+        }
+
+        .btnn {
+            background: silver;
+        }
+
+        .btns {
+            background: #ff44ff;
+        }
+
+        .diso {
+            display: none;
+        }
+
+        .oneback {
+            color: blue;
+        }
+
+        .oneback2 {
+            color: #2266dd;
+        }

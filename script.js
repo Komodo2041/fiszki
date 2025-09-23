@@ -1,20 +1,21 @@
+
 const STATES = {
   STARTED: 'started',
   STOPPED: 'stopped',
   PAUSED: 'paused'
 };
 
-var data = {
+var maxFiszki = 20;
 
+var data = {
   state: STATES.STOPPED,
   both: 1,
   duration: 20,
   hpart: 0,
-  maxFiszki: 20,
+  maxFiszki: maxFiszki,
   repeat: 1,
   showconf: 1,
   selectn: 0,
-
   words: [],
   word1: "",
   word2: "",
@@ -35,6 +36,7 @@ var data = {
   showtranslatepl: [],
   showtranslateeng: []
 };
+
 
 new Vue({
   el: '#app',
