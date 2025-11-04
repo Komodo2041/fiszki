@@ -34,7 +34,8 @@ var data = {
   disabledjoinwords: [],
   allWordsTryb: 0,
   showtranslatepl: [],
-  showtranslateeng: []
+  showtranslateeng: [],
+  sizeWorlds: 1
 };
 
 

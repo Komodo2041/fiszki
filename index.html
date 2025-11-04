@@ -7,27 +7,31 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
-
+    <link rel="shortcut icon" href="favicon.ico">
 </head>
 
 <body>
     <div id="app" class="container">
         <h2>Fiszki</h2>
-        <div class="configuration">
+        <div class="configuration mt10">
             <button @click="changeconf" class="btn btn-info">
                 <span v-show="showconf == 1">Ukryj konfigurację</span>
                 <span v-show="showconf == 0">Pokaż konfigruację</span>
             </button>
         </div>
-        <div class="configuration" v-show="showconf">
-            <label>Czas Wyświetlania (x*50ms)</label>
-            <input type="number" v-model="duration" class="form" min="1" /> {{ duration*50/1000 }} s<br />
+        <div class="addborder" v-show="showconf">
+            <label>Czas Wyświetlania (x*50ms) - {{ duration*50/1000 }} s</label>
+            <input type="number" v-model="duration" class=" form form-control w120" min="1" /><br />
             <label>Słowa wyświetlane razem</label>
             <input type="checkbox" value="1" name="bothword" v-model="both" /><br />
             <label>Powtarzaj od początku </label>
             <input type="checkbox" value="1" name="repeatword" v-model="repeat" /><br />
             <label>Ilość łączonych słów</label>
-            <input type="number" v-model="joinwordcount" class="form" min="2" /> <br />
+            <input type="number" v-model="joinwordcount" class="form form-control w120" min="2" /> <br />
+            <label>Wielkość Okna gdzie będą wyświetlać się słowa</label><br />
+            <label> Średnie: <input type="radio" name="sizeWorlds" v-model="sizeWorlds" value="1" /></label>
+            <label> Duże: <input type="radio" name="sizeWorlds" v-model="sizeWorlds" value="2" /></label>
+            <label> Ogromne: <input type="radio" name="sizeWorlds" v-model="sizeWorlds" value="3" /></label>
         </div>
 
         <div v-show="hpart == 0">
@@ -60,7 +64,9 @@
                 <button :disabled="state!=='started' && state !== 'paused'" title="stop" @click="stop()">
                     <i class="glyphicon glyphicon-stop"></i>
                 </button>
-                <p class="wordsShow">
+                <span class="shownr">{{nrword}}</span>
+                <p class="wordsShow" v-bind:class="{'big':sizeWorlds == 2, 'big2':sizeWorlds == 3}">
+
                     {{word1}} {{diff}} {{word2}}
                 </p>
             </div>

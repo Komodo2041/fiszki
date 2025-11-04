@@ -22,7 +22,7 @@
 
         .box_list {
             padding: 15px;
-            background: #afb0c0;
+            background: #dcdcaa;
             color: #1c1d1d;
             float: left;
             border: 1px solid #1c1d1d;
@@ -33,7 +33,7 @@
         }
 
         .box_list:hover {
-            background: #88afb0;
+            background: #bdbd88;
         }
 
         .main {
@@ -47,14 +47,25 @@
         .wordsShow {
             font-size: 60px;
             font-weight: bold;
+            margin: 40px 0px;
+        }
+
+        .wordsShow.big {
+            margin: 65px 0px;
+            font-size: 85px;
+        }
+
+        .wordsShow.big2 {
+            margin: 65px 0px;
+            font-size: 120px;
         }
 
         .wordsdiv {
-            margin: 5px;
+            margin: 10px;
         }
 
         .btnn {
-            background: silver;
+            background: orange;
         }
 
         .btns {
@@ -66,9 +77,28 @@
         }
 
         .oneback {
-            color: blue;
+            color: #333333;
         }
 
         .oneback2 {
-            color: #2266dd;
+            color: #228822;
+        }
+
+        .mt10 {
+            margin: 10px 0px;
+        }
+
+        .w120 {
+            width: 120px;
+        }
+
+        .addborder {
+            border: solid 2px #1c1c1c;
+            border-radius: 15px;
+            padding: 15px;
+        }
+
+        .shownr {
+            float: right;
+            font-size: 10px;
         }
