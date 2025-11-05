@@ -102,3 +102,25 @@
             float: right;
             font-size: 10px;
         }
+
+        .box_list {
+            font-size: 23px;
+            display: inline-block;
+        }
+
+        .quizbox {
+            display: inline-block;
+            margin: 2px;
+            padding: 2px;
+            font-size: 20px;
+
+        }
+
+        .quizbox button {
+            font-size: 20px;
+            border-radius: 10px;
+        }
+
+        .quizbox button:hover {
+            background: darkorange;
+        }

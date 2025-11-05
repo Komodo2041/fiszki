@@ -53,6 +53,8 @@
             <button @click="changeTryb(2)" class="btn btn-info" v-show="tryb != 2">Sprawdzaj (wpisz angielskie
                 słowo)</button>
             <button @click="changeTryb(3)" class="btn btn-info" v-show="tryb != 3">Łącz słowa</button>
+            <button @click="changeTryb(4)" class="btn btn-info" v-show="tryb != 4">Quiz</button>
+
 
             <div class="main" v-show="tryb == 0">
                 <button :disabled="state==='started'" title="start" @click="start()">
@@ -119,6 +121,24 @@
                     </div>
                 </div>
             </div>
+            <div class="main" v-show="tryb == 4">
+                <label>Quiz</label><br />
+                <div class="alert alert-success" role="alert" v-show="checwordpl == 1">
+                    Dobrze
+                </div>
+                <div class="alert alert-danger" role="alert" v-show="checwordpl == 2">
+                    Żle
+                </div>
+                <h2 class="addborder">{{word1}}</h2>
+
+                <div v-for="j in joinwords" :key="j" class="quizbox">
+                    <button @click="checkQuiz(words[j][1])" class="btn btnn ">{{words[j][1]}}
+                    </button>
+                </div>
+
+            </div>
+
+
 
             <div v-show=" tryb==0">
                 <h4>Wszystkie słowa</h4>

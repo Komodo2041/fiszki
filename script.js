@@ -66,14 +66,25 @@ new Vue({
         this.rpomworlds();
       }
       if (t == 3) {
-        data.joinwords = this.createRandomTable();
+        data.joinwords = this.createRandomTable(data.joinwordcount);
         data.joinwords2 = this.shuffleArray(data.joinwords);
         data.disabledjoinwords = [];
       }
+      if (t == 4) {
+        this.quizstep();
+      }
     },
-    createRandomTable: function () {
+    quizstep: function () {
+      data.joinwords = this.createRandomTable(data.joinwordcount - 1);
+      var n = Math.floor(Math.random() * 500);
+      data.joinwords.push(n);
+      data.joinwords = this.shuffleArray(data.joinwords);
+      data.word1 = data.words[n][0];
+      data.word2 = data.words[n][1];
+    },
+    createRandomTable: function (nr) {
       table = [];
-      for (i = 0; i < data.joinwordcount; i++) {
+      for (i = 0; i < nr; i++) {
         var n = Math.floor(Math.random() * 500);
         if (table.includes(n)) {
           i--;
@@ -82,6 +93,20 @@ new Vue({
         }
       }
       return table;
+    },
+    checkQuiz: function (word) {
+
+      if (word == data.word2) {
+        data.checwordpl = 1;
+        this.quizstep();
+      } else {
+        data.checwordpl = 2;
+      }
+
+      setTimeout(() => {
+        data.checwordpl = 0;
+      }, 500);
+
     },
     checkWordpl: function () {
       if (data.word2 == data.wordpl) {
@@ -193,7 +218,7 @@ new Vue({
         data.disabledjoinwords.push(n);
 
         if (data.disabledjoinwords.length == data.joinwords.length) {
-          data.joinwords = this.createRandomTable();
+          data.joinwords = this.createRandomTable(data.joinwordcount);
           data.joinwords2 = this.shuffleArray(data.joinwords);
           data.disabledjoinwords = [];
         }
