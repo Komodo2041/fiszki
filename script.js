@@ -70,7 +70,7 @@ new Vue({
         data.joinwords2 = this.shuffleArray(data.joinwords);
         data.disabledjoinwords = [];
       }
-      if (t == 4) {
+      if (t == 4 || t == 5) {
         this.quizstep();
       }
     },
@@ -94,9 +94,13 @@ new Vue({
       }
       return table;
     },
-    checkQuiz: function (word) {
-
-      if (word == data.word2) {
+    checkQuiz: function (word, test) {
+      if (test == 0) {
+        var check = word == data.word2;
+      } else {
+        var check = word == data.word1;
+      }
+      if (check) {
         data.checwordpl = 1;
         this.quizstep();
       } else {
