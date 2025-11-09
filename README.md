@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://maniontg.webd.pro/fiszki/">
-    <img src="https://raw.githubusercontent.com/Komodo2041/fiszki/main/screenshot.png" width="600" alt="Fiszki – nauka angielskiego">
+    <img src="https://github.com/Komodo2041/fiszki/blob/main/screenshot.PNG" width="600" alt="Fiszki – nauka angielskiego">
   </a>
 </p>
 
