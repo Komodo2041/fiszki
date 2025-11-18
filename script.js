@@ -11,7 +11,7 @@ var memory = getAllMemo(maxFiszki)
 if (!memory) {
   memory = getMemoStart(maxFiszki)
 }
-console.log(memory)
+
 
 var data = {
   state: STATES.STOPPED,
@@ -63,7 +63,7 @@ new Vue({
       data.hpart = 0;
       data.tryb = 0;
     },
-    changeTryb: function (t) {
+    chT: function (t) {
       this.pause();
       data.tryb = t;
 
@@ -85,6 +85,9 @@ new Vue({
     quizstep: function () {
       data.joinwords = this.createRandomTable(data.joinwordcount - 1);
       var n = Math.floor(Math.random() * 500);
+      if (data.words[n][0].toLowerCase() == data.words[n][1].toLowerCase()) {
+        var n = Math.floor(Math.random() * 500);
+      }
       data.joinwords.push(n);
       data.joinwords = this.shuffleArray(data.joinwords);
       data.word1 = data.words[n][0];
@@ -93,11 +96,14 @@ new Vue({
     },
     createRandomTable: function (nr) {
       table = [];
+
       for (i = 0; i < nr; i++) {
         var n = Math.floor(Math.random() * 500);
-        if (table.includes(n)) {
+
+        if (table.includes(n) || data.words[n][0].toLowerCase() == data.words[n][1].toLowerCase()) {
           i--;
         } else {
+
           table.push(n);
         }
       }

@@ -54,14 +54,14 @@
         <div v-if="hpart">
             <h3>Lista nr {{hpart}}</h3>
             <button @click="backList" class="btn btn-info">Powrót do wszystkich list</button>
-            <button @click="changeTryb(0)" class="btn btn-info" v-show="tryb != 0">Wyświetlaj Słowa</button>
-            <button @click="changeTryb(1)" class="btn btn-info" v-show="tryb != 1">Sprawdzaj (wpisz polskie
+            <button @click="chT(0)" class="btn btn-info" v-show="tryb != 0">Wyświetlaj Słowa</button>
+            <button @click="chT(1)" class="btn btn-info" v-show="tryb != 1">Sprawdzaj (wpisz polskie
                 słowo)</button>
-            <button @click="changeTryb(2)" class="btn btn-info" v-show="tryb != 2">Sprawdzaj (wpisz angielskie
+            <button @click="chT(2)" class="btn btn-info" v-show="tryb != 2">Sprawdzaj (wpisz angielskie
                 słowo)</button>
-            <button @click="changeTryb(3)" class="btn btn-info" v-show="tryb != 3">Łącz słowa</button>
-            <button @click="changeTryb(4)" class="btn btn-info" v-show="tryb != 4">Quiz (Pl)</button>
-            <button @click="changeTryb(5)" class="btn btn-info" v-show="tryb != 5">Quiz (Eng)</button>
+            <button @click="chT(3)" class="btn btn-info" v-show="tryb != 3">Łącz słowa</button>
+            <button @click="chT(4)" class="btn btn-info" v-show="tryb != 4">Quiz (Pl)</button>
+            <button @click="chT(5)" class="btn btn-info" v-show="tryb != 5">Quiz (Eng)</button>
 
             <div class="main" v-show="tryb == 0">
                 <button :disabled="state==='started'" title="start" @click="start()">
