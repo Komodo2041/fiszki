@@ -36,3 +36,32 @@ function changeMemory(nr, name, count = 1) {
         localStorage.setItem(key, JSON.stringify(mem));
     }
 }
+
+function saveBadWords(word1, word2) {
+    let word = [word1, word2];
+    words = JSON.parse(localStorage.getItem("bad_words"));
+    isInList = false;
+    for (i = 0; i < words.length; i++) {
+        if (words[i][0] == word1) {
+            isInList = true;
+            break;
+        }
+    }
+    if (isInList) {
+        words.push(word);
+        localStorage.setItem("bad_words", JSON.stringify(words));
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getMemoBadWord() {
+    words = JSON.parse(localStorage.getItem("bad_words"));
+    if (!words) {
+
+        localStorage.setItem("bad_words", JSON.stringify([]));
+        return [];
+    }
+    return words;
+}

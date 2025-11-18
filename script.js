@@ -11,7 +11,8 @@ var memory = getAllMemo(maxFiszki)
 if (!memory) {
   memory = getMemoStart(maxFiszki)
 }
-
+var badWords = getMemoBadWord();
+console.log(badWords);
 
 var data = {
   state: STATES.STOPPED,
@@ -121,6 +122,7 @@ new Vue({
         changeMemory(data.hpart, "quiz");
         data.memory[data.hpart]["quiz"]++;
       } else {
+        saveBadWords(data.word1, data.word2)
         data.checwordpl = 2;
       }
 
