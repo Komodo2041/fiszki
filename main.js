@@ -47,7 +47,7 @@ function saveBadWords(word1, word2) {
             break;
         }
     }
-    if (isInList) {
+    if (!isInList) {
         words.push(word);
         localStorage.setItem("bad_words", JSON.stringify(words));
         return true;
