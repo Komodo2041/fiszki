@@ -31,7 +31,9 @@
             <label>Wielkość Okna gdzie będą wyświetlać się słowa</label><br />
             <label> Średnie: <input type="radio" name="sizeWorlds" v-model="sizeWorlds" value="1" /></label>
             <label> Duże: <input type="radio" name="sizeWorlds" v-model="sizeWorlds" value="2" /></label>
-            <label> Ogromne: <input type="radio" name="sizeWorlds" v-model="sizeWorlds" value="3" /></label>
+            <label> Ogromne: <input type="radio" name="sizeWorlds" v-model="sizeWorlds" value="3" /></label><br />
+            <label>Pokaż statystyki</label>
+            <input type="checkbox" value="1" name="showmemory" v-model="showmemory" /><br />
         </div>
 
         <div v-show="hpart == 0">
@@ -40,6 +42,11 @@
                 <li v-for="n in maxFiszki" :key="n">
                     <div class="box_list" @click="changeList(n)">
                         Lista nr {{n}}
+                        <div v-show="showmemory" class="stat">
+                            Wyświetlenie: {{memory[n]["see"]}}/500<br />
+                            Łączenie: {{memory[n]["join"]}}/500<br />
+                            Quiz: {{memory[n]["quiz"]}}/500
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -169,7 +176,7 @@
             <script src="https://code.jquery.com/jquery-3.7.1.js"
                 integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
-            <script src="cokkie.js"></script>
+            <script src="main.js"></script>
             <script src="script.js"></script>
 </body>
 

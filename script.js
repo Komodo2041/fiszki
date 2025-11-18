@@ -7,6 +7,12 @@ const STATES = {
 
 var maxFiszki = 20;
 
+var memory = getAllMemo(maxFiszki)
+if (!memory) {
+  memory = getMemoStart(maxFiszki)
+}
+console.log(memory)
+
 var data = {
   state: STATES.STOPPED,
   both: 1,
@@ -15,6 +21,7 @@ var data = {
   maxFiszki: maxFiszki,
   repeat: 1,
   showconf: 1,
+  showmemory: 1,
   selectn: 0,
   words: [],
   word1: "",
@@ -35,7 +42,8 @@ var data = {
   allWordsTryb: 0,
   showtranslatepl: [],
   showtranslateeng: [],
-  sizeWorlds: 1
+  sizeWorlds: 1,
+  memory: memory
 };
 
 
@@ -81,6 +89,7 @@ new Vue({
       data.joinwords = this.shuffleArray(data.joinwords);
       data.word1 = data.words[n][0];
       data.word2 = data.words[n][1];
+
     },
     createRandomTable: function (nr) {
       table = [];
@@ -103,6 +112,8 @@ new Vue({
       if (check) {
         data.checwordpl = 1;
         this.quizstep();
+        changeMemory(data.hpart, "quiz");
+        data.memory[data.hpart]["quiz"]++;
       } else {
         data.checwordpl = 2;
       }
@@ -212,7 +223,10 @@ new Vue({
 
         }
       }
-
+      if (data.hpart) {
+        changeMemory(data.hpart, "see");
+        data.memory[data.hpart]["see"]++;
+      }
     },
     selectWordOne: function (n) {
       data.selectn = n;
@@ -225,6 +239,8 @@ new Vue({
           data.joinwords = this.createRandomTable(data.joinwordcount);
           data.joinwords2 = this.shuffleArray(data.joinwords);
           data.disabledjoinwords = [];
+          changeMemory(data.hpart, "join", data.joinwordcount);
+          data.memory[data.hpart]["join"] += data.joinwordcount;
         }
       }
     },

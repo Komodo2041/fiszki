@@ -124,3 +124,8 @@
         .quizbox button:hover {
             background: darkorange;
         }
+
+        .stat {
+            font-size: 10px;
+            color: blueviolet
+        }
