@@ -56,6 +56,11 @@ function saveBadWords(word1, word2) {
     }
 }
 
+function getBadWords() {
+    words = JSON.parse(localStorage.getItem("bad_words"));
+    return words;
+}
+
 function getMemoBadWord() {
     words = JSON.parse(localStorage.getItem("bad_words"));
     if (!words) {
@@ -64,4 +69,10 @@ function getMemoBadWord() {
         return [];
     }
     return words;
+}
+
+function clearBadWords() {
+
+    localStorage.setItem("bad_words", JSON.stringify([]));
+    return [];
 }

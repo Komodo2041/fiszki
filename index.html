@@ -34,7 +34,13 @@
             <label> Ogromne: <input type="radio" name="sizeWorlds" v-model="sizeWorlds" value="3" /></label><br />
             <label>Pokaż statystyki</label>
             <input type="checkbox" value="1" name="showmemory" v-model="showmemory" /><br />
+            <label>Pokaż Błędne słowa</label>
+            <input type="checkbox" value="1" name="showbadword" v-model="showbadword" /><br />
+            <label>Usuń Błędne słowa</label>
+            <button @click="delbadword" class="btn btn-info">Usuń</button>
         </div>
+
+
 
         <div v-show="hpart == 0">
             <h3>Listy do wyboru</h3>
@@ -51,6 +57,19 @@
                 </li>
             </ul>
         </div>
+
+        <div v-show="showbadword == 1 && badwords.length > 0" style="width:100%; float:left;">
+            <h3>Błędne słowa</h3>
+            <ul>
+                <li v-for="(i, index) in badwords">
+                    <div class="box_list ">
+                        <span>{{i[0]}} - {{i[1]}}</span>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+
         <div v-if="hpart">
             <h3>Lista nr {{hpart}}</h3>
             <button @click="backList" class="btn btn-info">Powrót do wszystkich list</button>
@@ -172,6 +191,9 @@
                     </li>
                 </ul>
             </div>
+
+
+
 
             <script src="https://code.jquery.com/jquery-3.7.1.js"
                 integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>

@@ -12,7 +12,7 @@ if (!memory) {
   memory = getMemoStart(maxFiszki)
 }
 var badWords = getMemoBadWord();
-console.log(badWords);
+
 
 var data = {
   state: STATES.STOPPED,
@@ -44,7 +44,9 @@ var data = {
   showtranslatepl: [],
   showtranslateeng: [],
   sizeWorlds: 1,
-  memory: memory
+  memory: memory,
+  badwords: badWords,
+  showbadword: 0
 };
 
 
@@ -123,6 +125,7 @@ new Vue({
         data.memory[data.hpart]["quiz"]++;
       } else {
         saveBadWords(data.word1, data.word2)
+        data.badwords = getBadWords();
         data.checwordpl = 2;
       }
 
@@ -171,6 +174,9 @@ new Vue({
       } else {
         data.showconf = 1
       }
+    },
+    delbadword: function () {
+      data.badwords = clearBadWords();
     },
     start: function () {
       this.state = STATES.STARTED;
