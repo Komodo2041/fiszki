@@ -1,6 +1,6 @@
 function getMemoStart(nr) {
 
-    data = [];
+    datas = [];
     for (i = 1; i <= nr; i++) {
         key = "mem_" + i;
         let zero = {
@@ -8,22 +8,22 @@ function getMemoStart(nr) {
             "join": 0,
             "see": 0
         };
-        data[i] = zero
+        datas[i] = zero
         localStorage.setItem(key, JSON.stringify(zero));
     }
-    return data;
+    return datas;
 }
 
 function getAllMemo(nr) {
     mem = localStorage.getItem("mem_1");
     if (mem) {
-        data = [];
+        datas = [];
         for (i = 1; i <= nr; i++) {
             key = "mem_" + i;
 
-            data[i] = JSON.parse(localStorage.getItem(key))
+            datas[i] = JSON.parse(localStorage.getItem(key))
         }
-        return data;
+        return datas;
     }
     return null;
 }

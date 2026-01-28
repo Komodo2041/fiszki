@@ -134,6 +134,7 @@ new Vue({
       }, 500);
 
     },
+
     checkWordpl: function () {
       if (data.word2 == data.wordpl) {
         data.checwordpl = 1;
@@ -178,6 +179,12 @@ new Vue({
     delbadword: function () {
       data.badwords = clearBadWords();
     },
+
+    delstat: function () {
+      getMemoStart(data.maxFiszki);
+      data.memory = getAllMemo(maxFiszki);
+    },
+
     start: function () {
       this.state = STATES.STARTED;
       this._tick();
@@ -294,7 +301,8 @@ new Vue({
         }, 2000);
       }
 
-    }
+    },
+
 
   }
 });
