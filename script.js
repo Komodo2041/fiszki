@@ -11,6 +11,7 @@ var memory = getAllMemo(maxFiszki)
 if (!memory) {
   memory = getMemoStart(maxFiszki)
 }
+
 var badWords = getMemoBadWord();
 
 
@@ -182,7 +183,7 @@ new Vue({
 
     delstat: function () {
       getMemoStart(data.maxFiszki);
-      data.memory = getAllMemo(maxFiszki);
+      data.memory = getAllMemo(data.maxFiszki);
     },
 
     start: function () {
@@ -192,10 +193,12 @@ new Vue({
       this.interval = setInterval(this._tick, 50);
       this.diff = " - ";
     },
+
     pause: function () {
       this.state = STATES.PAUSED;
       clearInterval(this.interval);
     },
+
     stop: function () {
       this.state = STATES.STOPPED;
       clearInterval(this.interval);
@@ -205,8 +208,8 @@ new Vue({
       this.step = 0;
       this.nrword = 1;
     },
-    _tick: function () {
 
+    _tick: function () {
       this.step++;
       if (this.step >= this.duration) {
         this.step = 0;

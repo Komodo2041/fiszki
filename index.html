@@ -39,7 +39,6 @@
             <label>Usuń Statystyki</label>
             <button @click="delbadword" class="btn btn-info">Usuń błędne słowa</button>&nbsp;
             <button @click="delstat" class="btn btn-info">Usuń Statystyki</button>
-
         </div>
 
         <div v-show="hpart == 0">
@@ -58,7 +57,7 @@
             </ul>
         </div>
 
-        <div v-show="showbadword == 1 && badwords.length > 0" style="width:100%; float:left;">
+        <div v-show="showbadword == 1 && badwords.length > 0" id="badword">
             <h3>Błędne słowa</h3>
             <ul>
                 <li v-for="(i, index) in badwords">
