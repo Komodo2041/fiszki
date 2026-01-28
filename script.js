@@ -12,6 +12,8 @@ if (!memory) {
   memory = getMemoStart(maxFiszki)
 }
 
+console.log(memory);
+
 var badWords = getMemoBadWord();
 
 
@@ -128,6 +130,8 @@ new Vue({
         saveBadWords(data.word1, data.word2)
         data.badwords = getBadWords();
         data.checwordpl = 2;
+        changeMemory(data.hpart, "bad");
+        data.memory[data.hpart]["bad"]++;
       }
 
       setTimeout(() => {

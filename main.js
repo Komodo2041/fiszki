@@ -7,7 +7,8 @@ function getMemoStart(nr) {
         let zero = {
             "quiz": 0,
             "join": 0,
-            "see": 0
+            "see": 0,
+            "bad": 0
         };
         datas[i] = zero
         localStorage.setItem(key, JSON.stringify(zero));
